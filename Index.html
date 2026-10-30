@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1b">
+  <title>Portfolio Pribadi | Rezha</title>
+  <style>
+    :root{--bg:#080d1b;--panel:#101a2e;--text:#f4f7ff;--muted:#aab6cc;--blue:#4ea1ff;--cyan:#62e6ed;--line:rgba(255,255,255,.1)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 10%,#142b50 0,transparent 32%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1100px,90%);margin:auto}
+    header{position:sticky;top:0;z-index:5;background:rgba(8,13,27,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:800;letter-spacing:1px;font-size:1.1rem}.logo span{color:var(--cyan)}
+    .links{display:flex;gap:26px;color:var(--muted);font-size:.93rem}.links a:hover{color:var(--cyan)}.menu{display:none;background:none;border:1px solid var(--line);color:white;padding:8px 12px;border-radius:9px}
+    .hero{min-height:650px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:55px;padding:80px 0}
+    .eyebrow{color:var(--cyan);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.78rem}
+    h1{font-size:clamp(2.8rem,6vw,5rem);line-height:1.05;margin:18px 0}.gradient{background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .intro{color:var(--muted);font-size:1.08rem;max-width:580px}.actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+    .btn{padding:12px 20px;border-radius:10px;font-weight:700;border:1px solid var(--line);transition:.2s}.primary{background:linear-gradient(100deg,#2879e8,#27b7c8);border:0;color:#06101c}.btn:hover{transform:translateY(-3px)}
+    .portrait{width:min(340px,100%);aspect-ratio:1/1;border-radius:32px;margin:auto;background:linear-gradient(145deg,#19345b,#101a2e);border:1px solid rgba(98,230,237,.35);display:grid;place-items:center;box-shadow:0 25px 80px #0008;position:relative;overflow:hidden}
+    .portrait:before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));filter:blur(2px);opacity:.2}
+    .portrait-content{position:relative;text-align:center;color:var(--muted);padding:25px}.portrait-content strong{display:block;color:white;font-size:1.2rem;margin-top:12px}.portrait-content small{display:block;margin-top:5px}
+    .avatar{width:125px;height:125px;border-radius:50%;border:3px solid #72dce9;display:grid;place-items:center;margin:auto;background:#172944;font-size:3rem}
+    section{padding:78px 0}.section-title{font-size:2rem;margin:0 0 10px}.section-sub{color:var(--muted);margin:0 0 30px}
+    .about-grid,.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.card{background:linear-gradient(145deg,rgba(20,34,58,.92),rgba(13,22,39,.92));border:1px solid var(--line);border-radius:18px;padding:25px}
+    .card h3{margin:0 0 9px}.card p{color:var(--muted);margin:0}.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.fact{padding:15px;border-radius:12px;background:#ffffff08}.fact small{display:block;color:var(--muted)}.fact b{display:block;margin-top:4px}
+    .skills{display:flex;flex-wrap:wrap;gap:12px}.skill{padding:10px 15px;border:1px solid #4ea1ff55;background:#4ea1ff12;border-radius:30px;color:#d9eaff}
+    .timeline{border-left:2px solid #3d8ee8;padding-left:23px}.timeline-item{position:relative;margin:0 0 24px}.timeline-item:before{content:"";position:absolute;left:-31px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px #62e6ed20}.timeline-item p{color:var(--muted);margin:5px 0}
+    .contact{display:flex;justify-content:space-between;align-items:center;gap:25px;flex-wrap:wrap}.contact .card{flex:1;min-width:260px}footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:.9rem;text-align:center}
+    .editor-bar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 32px);padding:10px 12px;border:1px solid #4ea1ff66;border-radius:14px;background:rgba(8,13,27,.94);box-shadow:0 12px 40px #0009;backdrop-filter:blur(14px)}
+    .editor-bar button{border:1px solid #ffffff24;background:#152642;color:#edf6ff;border-radius:8px;padding:9px 11px;font-weight:650;cursor:pointer}
+    .editor-bar button:hover,.editor-bar button.active{background:#2879e8;color:white}
+    .editor-label{font-size:.68rem;letter-spacing:1.2px;color:var(--cyan);font-weight:800;padding:0 4px}
+    #editStatus{font-size:.72rem;color:var(--muted);padding:0 5px}
+    body.editing [data-editable]{outline:1px dashed #62e6edaa;outline-offset:4px;border-radius:3px;cursor:text}
+    body.editing [data-editable]:focus{outline:2px solid var(--cyan);background:#ffffff0b}
+    @media(max-width:600px){.editor-bar{left:10px;right:10px;bottom:10px;gap:6px}.editor-bar button{font-size:.75rem;padding:8px}.editor-label{display:none}#editStatus{width:100%;text-align:center}}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;text-align:center;padding:65px 0}.intro{margin:auto}.actions{justify-content:center}.portrait{max-width:270px;grid-row:1}.links{display:none;position:absolute;top:72px;left:0;right:0;padding:20px 5%;background:#0b1324;flex-direction:column;gap:15px;border-bottom:1px solid var(--line)}.links.open{display:flex}.menu{display:block}.about-grid,.cards{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}section{padding:58px 0}}
+  </style>
+</head>
+<body>
+<header><nav class="wrap">
+  <a class="logo" href="#home">AHMAD REZHA<span>.</span></a>
+  <div class="links" id="links"><a href="#home">Beranda</a><a href="#about">Tentang</a><a href="#skills">Keahlian</a><a href="#experience">Pengalaman</a><a href="#contact">Kontak</a></div>
+  <button class="menu" id="menu" aria-label="Buka menu">☰</button>
+</nav></header>
+<main>
+  <div class="wrap hero" id="home">
+    <div>
+      <div class="eyebrow">Halo, selamat datang di website saya</div>
+      <h1>Saya <span class="gradient">Ahmad Rezha</span><br></h1>
+      <p class="intro">Saya mahasiswa Pendidikan Teknologi Informasi di UIN Ar-Raniry Banda Aceh. Saya tertarik pada teknologi, pemrograman, desain digital, dan terus belajar untuk mengembangkan kemampuan.</p>
+      <div class="actions"><a class="btn primary" href="#about">Kenali Saya</a><a class="btn" href="#contact">Hubungi Saya ↗</a></div>
+    </div>
+    <div class="portrait" id="portrait"><div class="portrait-content" id="portraitPlaceholder"><div class=""><img src="toto.png"style="width:200px; height:200px; border-radius:50%; object-fit:cover; position:absolute; inset:0; left:50%; top:50%; transform:translate(-50%, -50%);"></div><strong>Foto Profil</strong><small></small></div><img id="profilePhoto" alt="Foto profil Rezha" hidden style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"></div>
+  </div>
+  <section id="about"><div class="wrap">
+    <div class="eyebrow">Tentang saya</div><h2 class="section-title">Sedikit cerita tentang saya</h2>
+    <p class="section-sub">Pribadi yang ingin terus bertumbuh, belajar, dan berkarya.</p>
+    <div class="about-grid">
+      <div class="card"><h3>Profil singkat</h3><p>Saya adalah mahasiswa yang memiliki semangat untuk mempelajari hal baru, khususnya dalam bidang teknologi informasi. Saya senang mencoba ide, menyelesaikan tantangan, dan mengembangkan keterampilan melalui pengalaman.</p></div>
+      <div class="card"><h3>Informasi</h3><div class="facts">
+        <div class="fact"><small>Nama</small><b>Ahmad Rezha</b></div><div class="fact"><small>Status</small><b>Mahasiswa</b></div>
+        <div class="fact"><small>Kampus</small><b>UIN Ar-Raniry</b></div><div class="fact"><small>Program Studi</small><b>Pendidikan Teknologi Informasi</b></div>
+      </div></div>
+    </div>
+  </div></section>
+  <section id="skills"><div class="wrap">
+    <div class="eyebrow">Kemampuan</div><h2 class="section-title">Hal yang sedang saya pelajari</h2><p class="section-sub">Daftar ini bisa kamu ubah sesuai kemampuan yang benar-benar kamu kuasai.</p>
+    <div class="skills"><span class="skill">HTML & CSS</span><span class="skill">Dasar Python</span><span class="skill">Algoritma & Pemrograman</span><span class="skill">Microsoft Office</span><span class="skill">Canva & Desain</span><span class="skill">Public Speaking</span><span class="skill">Kerja Tim</span></div>
+  </div></section>
+  <section id="experience"><div class="wrap">
+    <div class="eyebrow">Perjalanan</div><h2 class="section-title">Pendidikan & pengalaman</h2><p class="section-sub">Ruang untuk menampilkan perjalanan dan pencapaian kamu.</p>
+    <div class="cards">
+      <div class="card"><h3>🎓 Pendidikan</h3><div class="timeline">
+        <div class="timeline-item"><b>UIN Ar-Raniry Banda Aceh</b><p>Pendidikan Teknologi Informasi · Mahasiswa</p></div>
+        <div class="timeline-item"><b>SMAN 1 PASIE RAJA</b><p> Lulusan angkatan 2026.</p></div>
+      </div></div>
+      <div class="card"><h3>🚀 Pengalaman & organisasi</h3><div class="timeline">
+        <div class="timeline-item"><b>Pengalaman organisasi </b>
+        <p>Lembaga Dakwah Kampus UIN Ar-Raniry 41</p>  <p>Ketua OSIS SMAN1PASIE RAJA 24-25
+        <p>Paskibraka Aceh Selatan 24</p>
+      <p>Pramuka SMANSAPARA</p>
+        <p>Purna Paskibraka ACSEL</p></div>
+        <div class="timeline-item"><b>penghargaan</b><p>Penghargaan Partipasi HUT RI 80</p>
+        <p>Penghargaan juara 2 PBB </p> 
+          <p>Penghargaan Olimpiade Sains Nasional</p>
+        <p>Penghargaan Pendidikan Ideologi Pancasila   </p> 
+        <p> Piagam Penghargaan Korps Kadet Republik Indonesia</p></div>
+      </div></div>
+    </div>
+  </div></section>
+  <section id="contact"><div class="wrap">
+    <div class="eyebrow">Mari terhubung</div><h2 class="section-title">Punya ide atau ingin bekerja sama?</h2><p class="section-sub">Silakan hubungi saya melalui media sosial atau email.</p>
+    <div class="contact"><div class="card"><h3>Kontak</h3><p>Email: ahmadrezha88@gmail.com</p><p>Instagram: @rezhaa__alvrz</p><p>Lokasi: Banda Aceh, Indonesia</p></div><a class="btn primary" href="ahmadrezha88@gmail.com">Kirim Email ↗</a></div>
+  </div></section>
+</main>
+<footer><div class="wrap">© 2026 Rezha. Dibuat dengan semangat belajar dan berkarya.</div></footer>
+<script>
+  const menu=document.getElementById('menu'),links=document.getElementById('links');
+  menu.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+  const editableSelector='h1,h2,h3,p,b,small,.eyebrow,.skill,.fact';
+  const editBtn=document.getElementById('editBtn');
+  const status=document.getElementById('editStatus');
+  const photoInput=document.getElementById('photoInput');
+  const photo=document.getElementById('profilePhoto');
+  const placeholder=document.getElementById('portraitPlaceholder');
+  const storageKey='rezhaPortfolioEditableV1';
+  let editing=false;
+  function setStatus(message){status.textContent=message;}
+  function applyEditableMode(on){
+    editing=on;
+    document.body.classList.toggle('editing',on);
+    document.querySelectorAll(editableSelector).forEach(el=>{
+      if(el.closest('.editor-bar')) return;
+      el.setAttribute('data-editable','');
+      el.contentEditable=on?'true':'false';
+      el.spellcheck=on;
+    });
+    editBtn.classList.toggle('active',on);
+    editBtn.textContent=on?'Selesai edit':'✎ Edit teks';
+    setStatus(on?'Mode edit aktif — klik teks untuk mengubahnya':'Mode edit nonaktif');
+  }
+  function saveChanges(){
+    const content=document.querySelector('main').innerHTML;
+    const photoData=photo.dataset.savedImage||'';
+    try{
+      localStorage.setItem(storageKey,JSON.stringify({content,photoData}));
+      setStatus('Perubahan berhasil disimpan di browser ini');
+    }catch(e){setStatus('Penyimpanan penuh. Unduh HTML untuk menyimpan perubahan.');}
+  }
+  function restoreChanges(){
+    try{
+      const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+      if(saved && saved.content){
+        document.querySelector('main').innerHTML=saved.content;
+        if(saved.photoData) showPhoto(saved.photoData,false);
+      }
+    }catch(e){console.warn('Tidak dapat memulihkan perubahan',e);}
+  }
+  function showPhoto(data,save=true){
+    photo.src=data;photo.hidden=false;placeholder.hidden=true;photo.dataset.savedImage=data;
+    if(save) saveChanges();
+  }
+  editBtn.addEventListener('click',()=>applyEditableMode(!editing));
+  document.getElementById('saveBtn').addEventListener('click',saveChanges);
+  document.getElementById('photoBtn').addEventListener('click',()=>photoInput.click());
+  photoInput.addEventListener('change',()=>{
+    const file=photoInput.files && photoInput.files[0];
+    if(!file) return;
+    if(!file.type.startsWith('image/')){setStatus('Pilih file gambar.');return;}
+    const reader=new FileReader();
+    reader.onload=()=>showPhoto(reader.result);
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('downloadBtn').addEventListener('click',()=>{
+    if(editing) applyEditableMode(false);
+    saveChanges();
+    const clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+    clone.querySelectorAll('[data-editable]').forEach(el=>el.removeAttribute('data-editable'));
+    const clonedPhoto=clone.querySelector('#profilePhoto');
+    if(photo.dataset.savedImage){clonedPhoto.src=photo.dataset.savedImage;clonedPhoto.hidden=false;clone.querySelector('#portraitPlaceholder').hidden=true;}
+    const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='portfolio_pribadi_rezha_edit.html';a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    setStatus('File HTML hasil edit sedang diunduh');
+  });
+  restoreChanges();
+  applyEditableMode(false);
+</script>
+</body>
+</html>
